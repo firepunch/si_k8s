@@ -89,9 +89,9 @@ spec:
             - name: TZ
               value: Asia/Seoul
             - name: JVB_TCP_HARVESTER_DISABLED
-              value: "true"
+              value: 'true'
             - name: PUBLIC_URL
-              value: "https://157.230.69.215.nip.io"
+              value: 'https://143.244.212.178.nip.io'
         - name: web
           image: jitsi/web:stable-6826
           imagePullPolicy: IfNotPresent
@@ -113,9 +113,9 @@ spec:
             - name: TZ
               value: Asia/Seoul
             - name: JVB_TCP_HARVESTER_DISABLED
-              value: "true"
+              value: 'true'
             - name: PUBLIC_URL
-              value: "157.230.69.215.nip.io"
+              value: '143.244.212.178.nip.io'
         - name: jvb
           image: jitsi/jvb:stable-6826
           imagePullPolicy: IfNotPresent
@@ -135,11 +135,11 @@ spec:
             - name: JICOFO_AUTH_USER
               value: focus
             - name: JVB_TCP_HARVESTER_DISABLED
-              value: "true"
+              value: 'true'
             - name: JVB_AUTH_USER
               value: jvb
             - name: JVB_PORT
-              value: "30300"
+              value: '30300'
             - name: JVB_AUTH_PASSWORD
               valueFrom:
                 secretKeyRef:

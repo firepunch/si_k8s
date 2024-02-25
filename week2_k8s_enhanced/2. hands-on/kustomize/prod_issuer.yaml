@@ -8,12 +8,12 @@ spec:
     # The ACME server URL
     server: https://acme-v02.api.letsencrypt.org/directory
     # Email address used for ACME registration
-    email: tech@darim.com
+    email: firepunch119@gmail.com
     privateKeySecretRef:
       # Name of a secret used to store the ACME account private key
       name: letsencrypt-prod-private-key
     # Add a single challenge solver, HTTP01 using nginx
     solvers:
-    - http01:
-        ingress:
-          class: nginx
+      - http01:
+          ingress:
+            class: nginx

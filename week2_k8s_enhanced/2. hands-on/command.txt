@@ -36,9 +36,10 @@ kubectl get po -A
 kubectl get pv -A
 kubectl get pvc -A
 
+Because will install using helm
 kubectl delete pvc postgres-pvc
-kubectl delete -f .\postgres-deployment.yaml
-kubectl delete -f postgres-service.yaml
+kubectl delete -f ./postgres-deployment.yaml
+kubectl delete -f ./postgres-service.yaml
 
 Let's dive into helm & operator
 
@@ -51,6 +52,7 @@ helm repo list vs helm list
 helm repo add
 helm repo update
 helm search repo
+helm search hub
 helm show values
 helm show chart 
 
@@ -58,6 +60,9 @@ helm show chart
    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
    helm repo update ingress-nginx
    helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
+
+   - View pod using namespace
+   kubectl get pod -n ingress-nginx
 
 2. Get load balancer's IP for FQDN
    [K8s name] > resources > Load balancers
@@ -73,6 +78,8 @@ helm show chart
    kubectl get pods --namespace cert-manager
    kubectl create -f staging_issuer.yaml (Optional)
    kubectl create -f prod_issuer.yaml
+   kubectl get secret
+   kubectl get secret -n
 
 
    cf. another approash using helm
@@ -87,7 +94,7 @@ helm show chart
 
 
 ###########################################################
-# Set up jitsi w/ kustomize
+# Option 1. Set up jitsi w/ kustomize
 ###########################################################
 See. si_k8s/week2_k8s_enhanced/2. hands-on/SIL-k8s install - kustomize.txt
 
@@ -95,7 +102,7 @@ https://meet.jit.si/
 https://github.com/jitsi/jitsi-meet
 
 ###########################################################
-# Set up jitsi w/ helm
+# Option 2. Set up jitsi w/ helm
 ###########################################################
 See. si_k8s/week2_k8s_enhanced/2. hands-on/SIL-k8s install - helm.txt
 

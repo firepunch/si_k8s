@@ -20,6 +20,7 @@
 
    Check running of jitsi:
       kubectl get pods -A
+      kubectl get pods -n jitsi
 
    
 --------
@@ -27,6 +28,7 @@
    $ kubectl delete secret jitsi-config -n jitsi
    $ kubectl delete -k  .
    $ kubectl delete namespace jitsi  (Keep this for helm practice)
+   $ kubectl get pod -n jitsi
 
 
 
