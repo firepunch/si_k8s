@@ -202,7 +202,7 @@ Question 6. Read the article below, then answer the questions:
         - Select Operators associated with 'olm-operators' OperatorGroup within the 'olm' namespace
 
       3.2) kubectl get operator -n olm --selector=operators.operatorGroup=global-operators
-        - Select Operators associated with 'global-operators' OperatorGroup within the 'olm' namespace
+        - Select Operators associated with 'global-operators' OperatorGroup within the 'operators' namespace
 
     4) kubectl get csv -A
       - It retrieve information about ClusterServiceVersions(CSV) in a k8s cluster.
