@@ -59,11 +59,12 @@ echo Fernet Key: $(kubectl get secret --namespace airflow airflow-fernet-key -o 
 # Show Dag and explain why we need custom image
 
 doctl registry login
-docker build -t airflow-custom .
+# docker build -t airflow-custom .
 docker buildx build --platform=linux/amd64 -t airflow-custom .
+# Add tag and publish to target url
 docker tag airflow-custom registry.digitalocean.com/<your-registry-name>/airflow-custom
-docker tag airflow-custom registry.digitalocean.com/si-k8s-session/airflow-custom
-docker push registry.digitalocean.com/si-k8s-session/airflow-custom
+docker tag airflow-custom registry.digitalocean.com/si-registry-mirim/airflow-custom
+docker push registry.digitalocean.com/si-registry-mirim/airflow-custom
 
 helm show values apache-airflow/airflow > values.yaml
 # modify defaultAirflowRepository to your registry (registry.digitalocean.com/si-k8s-session/airflow-custom)
@@ -73,7 +74,7 @@ helm show values apache-airflow/airflow > values.yaml
 kubectl get secrets -n airflow
 # if kubernetes.io/dockerconfigjson not found, create a secret
 # UI regsitry file download
-# kubectl create secret generic regcred --from-file=.dockerconfigjson=<path/to/.docker/config.json> --type=kubernetes.io/dockerconfigjson -n airflow
+# kubectl create secret generic regcred --from-file=.dockerconfigjson="/Users/mirimyu/IdealProjects/si_k8s/week3_airflow/2. hands-on/docker-config.json" --type=kubernetes.io/dockerconfigjson -n airflow
 # registry:
 #   secretName: generic
 helm upgrade --install airflow apache-airflow/airflow -n airflow -f values.yaml --debug
@@ -82,12 +83,12 @@ helm upgrade --install airflow apache-airflow/airflow -n airflow -f values.yaml 
 create a postgres
 kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
 docker pull dpage/pgadmin4
-docker run --name my-pgadmin -p 82:80 -e 'PGADMIN_DEFAULT_EMAIL=jk23oct@gmail.com' -e 'PGADMIN_DEFAULT_PASSWORD=password123' dpage/pgadmin4
+docker run --name my-pgadmin -p 82:80 -e 'PGADMIN_DEFAULT_EMAIL=firepunch119@gmail.com' -e 'PGADMIN_DEFAULT_PASSWORD=password123' dpage/pgadmin4
 add postgres connection in UI
 
 5. DAG with GitSync
 Create a private key with ssh-keygen if not exists
-kubectl create secret generic airflow-ssh-git-secret --from-file=gitSshKey=/Users/jonghyeokkim/.ssh/id_rsa -n airflow
+kubectl create secret generic airflow-ssh-git-secret --from-file=gitSshKey="/Users/mirimyu/.ssh/id_ed25519" -n airflow
 kubectl get secrets -n airflow
 *update gitSync: values.yaml
 
@@ -110,7 +111,15 @@ kubectl get secrets -n airflow
 #     sshKeySecret: airflow-ssh-git-secret
 
 helm upgrade --install airflow apache-airflow/airflow -n airflow -f values.yaml --debug
+
+# check webservice pod is running
+kubectl get pods -n airflow
+
 kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
+# enter the local web ui
+# check podcast_summary DAGs
+
+# Add postgress connection
 
 6. run a dag
 7. check pgadmin
